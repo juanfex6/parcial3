@@ -19,7 +19,7 @@ class PersonajeSerializer(serializers.ModelSerializer):
                     'clase_heroe': 'Si el personaje es héroe, debe indicar la clase del héroe.'
                 })
 
-            if not rango_heroe:
+            if rango_heroe is None:
                 raise serializers.ValidationError({
                     'rango_heroe': 'Si el personaje es héroe, debe indicar el rango del héroe.'
                 })

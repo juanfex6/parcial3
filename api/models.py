@@ -17,14 +17,8 @@ class Personaje(models.Model):
         ('Sin clase', 'Sin clase'),
     ]
 
-    RANGO_HEROE_CHOICES = [
-        ('Rango 1', 'Rango 1'),
-        ('Rango 2', 'Rango 2'),
-        ('Rango 3', 'Rango 3'),
-        ('Rango 4', 'Rango 4'),
-        ('Rango 5', 'Rango 5'),
-        ('Sin rango', 'Sin rango'),
-    ]
+    
+
 
     NIVEL_AMENAZA_CHOICES = [
         ('Lobo', 'Lobo'),
@@ -50,9 +44,8 @@ class Personaje(models.Model):
         blank=True
     )
 
-    rango_heroe = models.CharField(
-        max_length=20,
-        choices=RANGO_HEROE_CHOICES,
+    rango_heroe = models.PositiveIntegerField(
+        
         null=True,
         blank=True
     )
@@ -75,7 +68,7 @@ class Personaje(models.Model):
             if not self.clase_heroe:
                 raise ValidationError('Si el personaje es héroe, debe tener clase de héroe.')
 
-            if not self.rango_heroe:
+            if self.rango_heroe is None:
                 raise ValidationError('Si el personaje es héroe, debe tener rango de héroe.')
 
             if self.nivel_amenaza:
